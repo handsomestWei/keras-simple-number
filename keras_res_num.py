@@ -8,7 +8,10 @@ import cv2
 
 
 def main():
-    num = '4'
+    num = input('Enter a number range 0-9: ')
+    if int(num) > 10 or int(num) < 0:
+        print("the number not range 0-9")
+        return
     rec_train()
     rec_test(num)
 
@@ -49,9 +52,6 @@ def rec_train():
 
 
 def rec_test(num):
-    if int(num) > 10 or int(num) < 0:
-        print("please input 0-9 number")
-        return
     image_data = load_num_image(num)
     model = load_model("./number_model.h5")
     score = model.predict(image_data)
@@ -66,7 +66,7 @@ def rec_test(num):
     image_path = './image/number/' + str(max_val_index + 1) + '.jpg'
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     cv2.imshow("recNumber", img)
-    cv2.waitKey(3000)
+    cv2.waitKey(4000)
     cv2.destroyAllWindows()
 
 
